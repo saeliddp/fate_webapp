@@ -17,8 +17,7 @@ def splitByDoubleZeros(doc_num):
     
 
 # finds the index of a Snippet with the given original rank in a list of Snippets
-# might be improved upon with binary search if the snippet_list is sorted by original rank
-# returns -1 if the desired Snippet is not found
+# returns None if the desired Snippet is not found
 def binarySnippetSearch(low_index, high_index, og_rank, snippet_list):
     median = int((low_index + high_index) / 2)
     median_rank = int(snippet_list[median].get_rank())
@@ -66,8 +65,8 @@ def extractFromFile(file_name, num_snippets):
         q_and_r = splitByDoubleZeros(tokens[2])
         qid = int(q_and_r[0])
         
-        # once a new qid is reached, set currQid equal to it,
-        # set snippetsAdded equal to zero, and add an empty list at
+        # once a new qid is reached, set curr_qid equal to it,
+        # set snippets_added equal to zero, and add an empty list at
         # results[currQid]
         if curr_qid != qid:
             curr_qid = qid
@@ -86,7 +85,7 @@ def extractFromFile(file_name, num_snippets):
                 print("Current Snippet's original rank is unequal to the 'r' field in the .txt file.")
                 
             # [query_name, title, url, description]
-            # replaces double quotes with single quotes to avoid messing up JSON
+            # replaces double quotes with single quotes
             results[qid].append([query_snippet.query.replace('"', "'"), curr_snippet.get_title().replace('"', "'"), 
                                 curr_snippet.get_url().replace('"', "'"), curr_snippet.get_desc().replace('"', "'")])
                                 
