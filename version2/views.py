@@ -6,9 +6,10 @@ import random
 # Create your views here.
 first_algorithm = "t"
 second_algorithm = "rp"
+num_search_results = 5
 # gets relevant data from snippet.pickle file
-first_snippets = extractFromFile(first_algorithm + ".txt", 5)
-second_snippets = extractFromFile(second_algorithm + ".txt", 5)
+first_snippets = extractFromFile(first_algorithm + ".txt", num_search_results)
+second_snippets = extractFromFile(second_algorithm + ".txt", num_search_results)
 unseen_qids = []
 num_qids_seen = 0
 
@@ -24,6 +25,15 @@ def getNextQid():
     new_qid = unseen_qids[0]
     unseen_qids.remove(new_qid)
     return new_qid
+
+def consent(request):
+    return render(request, 'version2/consent.html')
+    
+def demographics(request):
+    return render(request, 'version2/demographics.html')
+    
+def instructions(request):
+    return render(request, 'version2/instructions.html')
 
 def home(request):
     curr_qid = getRandomQid()
@@ -44,6 +54,8 @@ def update(request):
         return redirect('version2-home')
     else:
         # should I reset unseen_qids and num_qids_seen here?
-        return render(request, 'version2/thanks.html')
+        return redirect('version2-thanks')
     
-
+def thanks(request):
+    return render(request, 'version2/thanks.html')
+    
