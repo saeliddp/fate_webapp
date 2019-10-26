@@ -175,7 +175,7 @@
   </div>
 
   <!-- Sets up the input form -->
-  <form action="../update/" id="main_form">
+  <form action="../update/" id="main_form" method="get">
   <div class="row main_divs">
     <div class="radio_div">
       <input type="radio" name="radio" value="first" id="radio-left" class="form-radio">
@@ -193,12 +193,16 @@
 		<input type="submit" value="submit" class="button">
     </div>
   </div>
+  <input type="hidden" name="time_elapsed" value="0" id="time_elapsed_input">
   </form>
 </body>
 <script>
 secondsRemaining = 30
 function updateSeconds() {
 	// time is up
+	elapsed = 30 - secondsRemaining;
+	document.getElementById("time_elapsed_input").value = elapsed.toString();
+	
 	if (secondsRemaining < 1) {
 		document.getElementById("main_form").submit();
 	} else {
