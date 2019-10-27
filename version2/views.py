@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from version2.models import *
 import random
 # Create your views here.
-first_algorithm = "t"
+first_algorithm = "0g"
 second_algorithm = "rp"
 num_search_results = 5
 # gets relevant data from snippet.pickle file
@@ -33,13 +33,18 @@ def consent(request):
     return render(request, 'version2/consent.html')
     
 def demographics(request):
-    return render(request, 'version2/demographics.html')
+    if 'age' in request.GET:
+        global respondent
+        respondent = Respondent(
+            age=request.GET['age'],
+            gender=request.GET['gender'],
+            education=request.GET['education'])
+        respondent.save()
+        return redirect('version2-instructions')
+    else:
+        return render(request, 'version2/demographics.html')
     
 def instructions(request):
-    global respondent
-    # this would be the data passed from demographics form
-    respondent = Respondent.objects.all()[0] # test respondent
-    #respondent.save()
     return render(request, 'version2/instructions.html')
 
 def home(request):
