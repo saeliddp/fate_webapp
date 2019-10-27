@@ -1,11 +1,85 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+	<style>
+		.header {
+			background-color: #f2f2f2;
+			padding-top: 10px;
+			margin: 0px;
+			text-align: center;
+			color: #63aba8;
+			font-family: "verdana";
+		}
+
+		form {
+			background:rgb(218, 228, 228);
+			padding: 20px;
+			border-radius: 5px;
+			margin-top: 30px;
+			display: table;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.question {
+			padding-bottom: 10px;
+		}
+
+		.question{
+			font-family: "verdana";
+		}
+
+		.question label {
+			font-size: 15px;
+		}
+
+		form input{
+  			margin-top: 10px;
+		}
+	</style>
+
+	<title>F.A.T.E. Project</title>
 </head>
-<body>
-<p>demographic survey</p>
-<form action="../instructions/" id="to_instructions">
-  <input type="submit" value="to instructions">
-</form>
+
+<body style="background-color: #f2f2f2">
+
+	<h1 class="header">User Information Questionnaire</h1>
+	<form action="instructions.html" method="POST">
+		<div class="question">
+			<label>What is your age?</label><br>
+			<select name="age">
+				<option value="18-21">18 - 21 years old</option>
+				<option value="22-28">22 - 28 years old</option>
+				<option value="29-35">29 - 35 years old</option>
+				<option value="36-49">36 - 49 years old</option>
+				<option value="50-65">50 - 65 years old</option>
+				<option value="65+">65+ years old</option>
+			</select><br>
+		</div>
+		<div class="question">
+			<label>What gender do you identify as?</label><br>
+			<select name="gender">
+				<option value="male">Male</option>
+				<option value="female">Female</option>
+				<option value="nonbinary">Non-binary/third gender</option>
+				<option value="others">Others</option>
+				<option value="notToSay">Prefer not to say</option>
+			</select><br>
+		</div>
+		<div class="question">
+			<label>What is the highest degree or level of education you have completed? </label><br>
+			<select name="degree">
+				<option value="someHighSchool">Some High School</option>
+				<option value="highSchool">High School</option>
+				<option value="bechelor">Bachelor's Degree</option>
+				<option value="master">Master's Degree</option>
+				<option value="phdOrHigher">Ph.D. or higher</option>
+				<option value="tradeSchool">Trade School</option>
+			</select><br>
+		</div>
+		<input type="submit" value="Submit">
+	</form>
 </body>
+
 </html>
