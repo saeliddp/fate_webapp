@@ -6,23 +6,20 @@ from version2.models import *
 import random
 
 num_search_results = 5
-# maps algorithm names to lists of snippets
-# algorithms to be displayed on the left and right, respectively
+# algorithms to be initially displayed on the left and right, respectively
 left_alg = "0g"
 right_alg = "rp"
 # algorithms to be displayed on left and right after 10 turns
 round_two_l = "1g"
 round_two_r = "05g"
 
+# maps algorithm names to lists of snippets
 alg_to_snippets = {
     left_alg: extractFromFile(left_alg + ".txt", num_search_results),
     right_alg: extractFromFile(right_alg + ".txt", num_search_results),
     round_two_l: extractFromFile(round_two_l + ".txt", num_search_results),
     round_two_r: extractFromFile(round_two_r + ".txt", num_search_results)
 }
-# algorithms to be displayed on the left and right, respectively
-left_alg = "0g"
-right_alg = "rp"
 
 # whether or not to swap the left and right algorithms on a given turn
 swap = [False, True, True, False, True, True, True, False, False, False, False, False, True, True, False, False, True, False, True, True]
@@ -76,7 +73,6 @@ def home(request):
     }
     return render(request, 'version2/home.html', context);
 
-num_responses = 0
 def update(request):
     global num_qids_seen
     global curr_qid
@@ -87,26 +83,27 @@ def update(request):
     num_qids_seen += 1
     if (num_qids_seen <= 20):
         # send data to server
-        # only if the user selected an option
+        # we will have to have a 'None' algorithm in our database to represent 
+        # if the user didn't choose at all
+        choice = 'None'
+        not_choice = 'None'
         if 'radio' in request.GET:
-            choice = ''
-            not_choice = ''
             if request.GET['radio'] == 'left':
                 choice = left_alg
                 not_choice = right_alg
             else:
                 choice = right_alg
                 not_choice = left_alg
-            print("User chose: " + choice)
-            num_responses += 1
-            """ Uncomment for database action
-            response = Response(respondent=respondent,
-                                query=Query.objects.filter(query_id=curr_qid)[0],
-                                chosen_alg=Algorithm.objects.filter(name=choice)[0],
-                                unchosen_alg=Algorithm.objects.filter(name=not_choice)[0],
-                                time_elapsed=int(request.GET['time_elapsed']))
-            response.save()
-            """
+
+        print("User chose: " + choice)
+        """ Uncomment for database action
+        response = Response(respondent=respondent,
+                            query=Query.objects.filter(query_id=curr_qid)[0],
+                            chosen_alg=Algorithm.objects.filter(name=choice)[0],
+                            unchosen_alg=Algorithm.objects.filter(name=not_choice)[0],
+                            time_elapsed=int(request.GET['time_elapsed']))
+        response.save()
+        """
         if num_qids_seen == 10:
             print("Switching to second and third")
             left_alg = round_two_l
@@ -127,7 +124,5 @@ def update(request):
         return redirect('version2-thanks')
 
 def thanks(request):
-    global num_responses
-    print(num_responses)
     return render(request, 'version2/thanks.html')
     
