@@ -78,13 +78,22 @@
       color: blue;
     }
     .result_data {
-      height: 19px;
+      height: 20px;
       margin-top: 2px;
-      padding-bottom: 10px;
+      padding-bottom: 8px;
       font-size: 12px;
       text-decoration: none;
       color: #565656;
     }
+	.url {
+	  height: 15px;
+	  margin-bottom: 0px;
+	  margin-top: 0px;
+	  font-size: 13px;
+	  color: #008000;
+	  padding-top: 1px;
+	  padding-bottom: 0px;
+	 }
     .radio_div {
       float: left;
       text-align: center;
@@ -150,7 +159,7 @@
 
   <!-- Sets up the Query bar -->
   <div class="main_divs">
-    <p class="query" id="qstring">Query: {{ query_name }}</p>
+    <p class="query" id="qstring">Search: {{ query_name }}</p>
   </div>
 
   <!-- Sets up the two sets of search results -->
@@ -158,8 +167,9 @@
     <div class="column columnl" style="background-color: white">
 	  {% for snippet in left_snippets %}
 	    <div class="result">
-          <h2 class="result_title">{{ snippet.1 }}</h2>
-          <p class="result_data">{{ snippet.3 }}</p>
+          <h2 class="result_title result">{{ snippet.1 }}</h2>
+		  <p class="url result">{{ snippet.2 }}</p>
+          <p class="result_data result">{{ snippet.3 }}</p>
         </div>  
 	  {% endfor %}
 	</div>
@@ -167,8 +177,9 @@
     <div class="column columnr" style="background-color: white">
       {% for snippet in right_snippets %}
 	    <div class="result">
-          <h2 class="result_title">{{ snippet.1 }}</h2>
-          <p class="result_data">{{ snippet.3 }}</p>
+          <h2 class="result_title result">{{ snippet.1 }}</h2>
+		  <p class="url result">{{ snippet.2 }}</p>
+          <p class="result_data result">{{ snippet.3 }}</p>
         </div>  
 	  {% endfor %}
     </div>
