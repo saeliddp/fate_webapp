@@ -8,10 +8,10 @@ import random
 num_search_results = 5
 # algorithms to be initially displayed on the left and right, respectively
 left_alg = "0g"
-right_alg = "rp"
+right_alg = "01gfp"
 # algorithms to be displayed on left and right after 10 turns
-round_two_l = "1g"
-round_two_r = "05g"
+round_two_l = "05gfp"
+round_two_r = "09gfp"
 
 # maps algorithm names to lists of snippets
 alg_to_snippets = {
