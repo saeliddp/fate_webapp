@@ -10,13 +10,15 @@ num_search_results = 5
 left_alg = "0g"
 right_alg = "01gfp"
 # algorithms to be displayed on left and right after 10 turns
+round_one_l = "0g"
+round_one_r = "01gfp"
 round_two_l = "05gfp"
 round_two_r = "09gfp"
 
 # maps algorithm names to lists of snippets
 alg_to_snippets = {
-    left_alg: extractFromFile(left_alg + ".txt", num_search_results),
-    right_alg: extractFromFile(right_alg + ".txt", num_search_results),
+    left_alg: extractFromFile(round_one_l + ".txt", num_search_results),
+    right_alg: extractFromFile(round_one_r + ".txt", num_search_results),
     round_two_l: extractFromFile(round_two_l + ".txt", num_search_results),
     round_two_r: extractFromFile(round_two_r + ".txt", num_search_results)
 }
@@ -30,6 +32,17 @@ respondent = None
 
 for qid in alg_to_snippets[left_alg]:
     unseen_qids.append(qid)
+def reset():
+    global unseen_qids
+    global num_qids_seen
+    global curr_qid
+    global left_alg
+    global right_alg
+    unseen_qids = []
+    for qid in alg_to_snippets[left_alg]:
+        unseen_qids.append(qid)
+    curr_qid = 0
+    num_qids_seen = 0
 
 def getRandomQid():
     new_qid = unseen_qids[random.randint(0, len(unseen_qids) - 1)]
@@ -42,6 +55,7 @@ def getNextQid():
     return new_qid
 
 def consent(request):
+    reset()
     return render(request, 'version2/consent.html')
     
 def demographics(request):
