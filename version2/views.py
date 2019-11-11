@@ -110,14 +110,14 @@ def update(request):
                 not_choice = left_alg
 
         print("User chose: " + choice)
-        """ Uncomment for database action
+        # Uncomment for database action
         response = Response(respondent=respondent,
                             query=Query.objects.filter(query_id=curr_qid)[0],
                             chosen_alg=Algorithm.objects.filter(name=choice)[0],
                             unchosen_alg=Algorithm.objects.filter(name=not_choice)[0],
                             time_elapsed=int(request.GET['time_elapsed']))
         response.save()
-        """
+        
         if num_qids_seen == 10:
             print("Switching to second and third")
             left_alg = round_two_l
